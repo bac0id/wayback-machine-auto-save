@@ -20,9 +20,9 @@ def start_saving_by_queueing(wayback_machine_api, urls):
     while len(queue) > 0:
         url = queue.popleft()
         is_save_successful = wayback_machine_api.save_page(url)
-        # if not is_save_successful:
-        #     continue
-        #     queue.append(url)
+        if not is_save_successful:
+            continue
+            queue.append(url)
 
 def main():
     urls_list_filename, cookies, proxies = load_app_args()
@@ -37,11 +37,10 @@ def main():
     api = WaybackMachineAPI(cookies=cookies, proxies=proxies)
     print("WaybackMachineAPI inited.")
     
-    while True:
-        urls = load_urls(urls_list_filename)
-        print("urls:",urls)
-        #start_saving_by_threading(api, urls)
-        start_saving_by_queueing(api, urls)
+    urls = load_urls(urls_list_filename)
+    print("urls:",urls)
+    #start_saving_by_threading(api, urls)
+    start_saving_by_queueing(api, urls)
 
 if __name__=="__main__":
     main()
