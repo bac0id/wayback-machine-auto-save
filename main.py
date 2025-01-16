@@ -1,8 +1,10 @@
-from app_args_loader import *
+
 from threading import Thread
 import concurrent.futures
 from collections import deque
 
+from app_args_loader import *
+from urls_list_loader import load_urls_from_file
 from save_page_options import SavePageOptions
 from wayback_machine_api import WaybackMachineAPI
 
@@ -37,8 +39,8 @@ def main():
     api = WaybackMachineAPI(cookies=cookies, proxies=proxies)
     print("WaybackMachineAPI inited.")
     
-    urls = load_urls(urls_list_filename)
-    print("urls:",urls)
+    urls = load_urls_from_file(urls_list_filename)
+    print("urls:", urls)
     #start_saving_by_threading(api, urls)
     start_saving_by_queueing(api, urls)
 

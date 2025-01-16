@@ -79,19 +79,3 @@ def load_proxies(filename="proxy.ini"):
         except Exception as e:
             print("Exception:", e)
         return None
-
-def load_urls(filename="saving_urls.ini"):
-    if is_running_in_github_actions():
-        urls = os.environ.get("SAVING_URLS")
-        urls = urls.split()
-        return urls
-    else:
-        try:
-            with open(filename, 'r') as f:
-                urls = f.read()
-            urls = urls.split()
-            return urls
-        except Exception as e:
-            print("Exception:", e)
-        return None
-        
