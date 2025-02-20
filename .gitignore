@@ -170,6 +170,9 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+# Vscode
+.vscode/
+
 # Vars
 *.txt
 *.json
